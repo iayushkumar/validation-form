@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+
+
+        const userInfo = {};
+
+        const Name = (e) => {
+            const input = e.target;
+            const a = document.getElementById('a');
+            const value = input.value.trim(); // Remove leading and trailing whitespaces
+
+            // Regex pattern for a simple name (allowing letters, spaces, and hyphens)
+            const nameRegex = /^[A-Za-z\s-]+$/;
+
+            if (nameRegex.test(value)) {
+                // Valid name
+                a.style.borderColor = "green"; // Reset border color
+                //   console.log("Valid name:", value);
+                nameErrorMessage.textContent = '';
+            } else {
+                // Invalid name
+                a.style.borderColor = "red"; // Set border color to red
+                nameErrorMessage.textContent = 'Invalid name';
+                //   console.log("Invalid name:", value);
+            }
+
+            userInfo.name = e.target.value.trim();
+
+        }
+
+
+
+        const Email = (e) => {
+            const input = e.target;
+            const b = document.getElementById('b');
+            const value = input.value.trim(); // Remove leading and trailing whitespaces
+
+            // Regex pattern for a simple name (allowing letters, spaces, and hyphens)
+            const nameRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+            if (nameRegex.test(value)) {
+                // Valid name
+                b.style.borderColor = "green"; // Reset border color
+                //   console.log("Valid name:", value);
+                emailErrorMessage.textContent = '';
+            } else {
+                // Invalid name
+                b.style.borderColor = "red"; // Set border color to red
+                emailErrorMessage.textContent = 'Invalid Email';
+                //   console.log("Incorrect Email:", value);
+            }
+            userInfo.email = e.target.value.trim();
+        }
+
+        const password = (e) => {
+            const input = e.target;
+            const b = document.getElementById('c');
+            const value = input.value.trim(); // Remove leading and trailing whitespaces
+
+            // Regex pattern for a simple name (allowing letters, spaces, and hyphens)
+            const nameRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (nameRegex.test(value)) {
+                // Valid name
+                b.style.borderColor = "green"; // Reset border color
+                //   console.log("Valid name:", value);
+                passwordErrorMessage.textContent = '';
+            } else {
+                // Invalid name
+                b.style.borderColor = "red"; // Set border color to red
+                passwordErrorMessage.textContent = 'password should contain atleat one uppercase,lowercase symbol and digit:';
+                //   console.log("password should contain atleat one uppercase,lowercase symbol and digit:", value);
+            }
+            userInfo.password = e.target.value.trim();
+        }
+
+
+        const confirmPassword = (e) => {
+            const confirmPasswordInput = e.target;
+            const passwordInput = document.getElementById('c');
+            const confirmPassword = confirmPasswordInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (password !== confirmPassword) {
+                confirmPasswordInput.style.borderColor = "red";
+                confirmPasswordErrorMessage.textContent = 'Passwords do not match.';
+            } else {
+                confirmPasswordInput.style.borderColor = "green";
+                confirmPasswordErrorMessage.textContent = '';
+            }
+
+            userInfo.confirmPassword = e.target.value.trim();
+        }
+
+        const Phone = (e) => {
+
+
+            const input = e.target;
+            const b = document.getElementById('d');
+            const value = input.value.trim(); // Remove leading and trailing whitespaces
+
+            // Regex pattern for a simple name (allowing letters, spaces, and hyphens)
+            const nameRegex = /^[0-9\s()+-]+$/;;
+
+            if (nameRegex.test(value)) {
+                // Valid name
+                b.style.borderColor = "green"; // Reset border color
+                //   console.log("Valid name:", value);
+                phoneErrorMessage.textContent = '';
+            } else {
+                // Invalid name
+                b.style.borderColor = "red"; // Set border color to red
+                phoneErrorMessage.textContent = 'Invalid No';
+                //   console.log("only numbers are allowed:", value);
+            }
+            userInfo.phone = e.target.value.trim();
+
+        }
+        const url = (e) => {
+            const input = e.target;
+            const a = document.getElementById('e');
+            const value = input.value.trim(); // Remove leading and trailing whitespaces
+
+            // Regex pattern for a simple name (allowing letters, spaces, and hyphens)
+            const nameRegex = /^(https?:\/\/)?([\w.-]+\.[a-z]{2,})(\/\S*)?$/i;
+
+            if (nameRegex.test(value)) {
+                // Valid name
+                a.style.borderColor = "green"; // Reset border color
+                //   console.log("Valid name:", value);
+                urlErrorMessage.textContent = '';
+            } else {
+                // Invalid name
+                a.style.borderColor = "red"; // Set border color to red
+                urlErrorMessage.textContent = 'Invalid url';
+                //   console.log("Invalid Url:", value);
+            }
+            userInfo.url = e.target.value.trim();
+        }
+        const area = (e) => {
+            const input = e.target;
+            const a = document.getElementById('f');
+            const value = input.value.trim(); // Remove leading and trailing whitespaces
+
+            // Regex pattern for a simple name (allowing letters, spaces, and hyphens)
+            const nameRegex = /^[a-zA-Z.]+$/;
+
+            if (nameRegex.test(value)) {
+                // Valid name
+                a.style.borderColor = "green"; // Reset border color
+                //   console.log("Valid name:", value);
+                textErrorMessage.textContent = '';
+            } else {
+                // Invalid name
+                a.style.borderColor = "red"; // Set border color to red
+                textErrorMessage.textContent = 'Invalid text';
+                //   console.log("Invalid Text:", value);
+            }
+            userInfo.textArea = e.target.value.trim();
+        }
+
+        function validateAndUpload() {
+            var fileInput = document.getElementById('fileInput');
+            var file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a file.');
+                return;
+            }
+
+            // Perform additional validation if needed
+            var allowedTypes = ['application/pdf'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Invalid file type. Please select a PDF file.');
+                return;
+            }
+
+            // You can also check file size, file name, etc.
+
+            // Log the user information object to the console
+            console.log("User Information:", userInfo);
+        }
+
+
+    </script>
+
+    <style>
+
+
+
+        #fileInput {
+            /* display: flex; */
+            align-items: right;
+        }
+
+       #abc{
+        width: 300px;
+       }
+
+       #fileInputContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Adjust alignment as needed */
+    }
+    </style>
+
+
+</head>
+
+<body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    <!-- <div class="flex flex-col items-center p-11 w-300 m-11 p-11 bg-white"> -->
+
+    
+    <div id="abc" class="flex flex-col items-left mt-11 p-4  mx-auto bg-[#94a3b8]">
+        <h1 class="text-2xl mb-2 text-center text-white">Validation form</h1>
+
+        <input class="m-4 p-1  w-1/1 border-4 " id="a" type="text" placeholder="Name" oninput="Name(event)">
+        <div id="nameErrorMessage" class="text-red-500 text-xs h-13px"></div>
+
+        <input class="p-1 m-4 w-1/1 border-4" id="b" maxlength="" type="text" placeholder="Email"
+            oninput="Email(event)">
+        <div id="emailErrorMessage" class="text-red-500  "></div>
+
+        <input class="m-4 p-1 w-1/1 border-4" id="c" type="password" placeholder="Password" oninput="password(event)">
+        <div id="passwordErrorMessage" class="text-red-500 "></div>
+
+        <input class="m-4 p-1 w-1/1 border-4" id="confirmPassword" type="password" placeholder="Confirm Password"
+            oninput="confirmPassword(event)">
+        <div id="confirmPasswordErrorMessage" class="text-red-500"></div>
+
+
+        <input class="m-4 p-1 w-1/1 border-4" id="d" type="text" placeholder="Phone No" oninput="Phone(event)">
+        <div id="phoneErrorMessage" class="text-red-500 "></div>
+
+        <input class="m-4 p-1 w-1/1 border-4" id="e" type="text" placeholder="URL" oninput="url(event)">
+        <div id="urlErrorMessage" class="text-red-500 "></div>
+
+        <input class="m-4 p-1 w-1/1 border-4" id="f" type="text" placeholder="Text Area" oninput="area(event)">
+        <div id="textErrorMessage" class="text-red-500 "></div>
+
+        <!-- <input type="file" id="fileInput" />
+        <button type="button" class="bg-cyan-400" onclick="validateAndUpload()">submit</button> -->
+        <div id="fileInputContainer">
+            <input type="file"  id="fileInput" />
+        </div>
+        <!-- <button type="button" class="bg-cyan-400" onclick="validateAndUpload()">submit</button> -->
+        <button type="button" class="bg-cyan-400 py-2 px-4 text-white rounded hover:bg-cyan-500 focus:outline-none focus:shadow-outline-cyan" onclick="validateAndUpload()">Submit</button>
+        
+    </div>
+
+</body>
+
+</html>
